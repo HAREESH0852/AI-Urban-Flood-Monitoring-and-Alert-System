@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="hero-section" style="background: #1e293b; color: white; padding: 40px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);">
+    <h1 style="margin: 0;">AI Driven Urban Flood Monitoring & Alert System</h1>
+    <p style="margin-top: 10px; opacity: 0.9; max-width: 600px;">
+        Leveraging high-dimensional predictive streaming parameters to generate localized early risk metrics.
+    </p>
+</div>
+
+<div class="dashboard-grid">
+    <div class="step-card">
+        <h3>Step 1: Data Audit</h3>
+        <p>Review current telemetry history and environmental records directly from the database engine.</p>
+        <a href="{{ url_for('dataset') }}" class="btn-primary">View Records</a>
+    </div>
+
+    <div class="step-card">
+        <h3>Step 2: Engine Training</h3>
+        <p>Optimize and fit Random Forest, Gradient Boosting, and ANN parameters for precision.</p>
+        <a href="{{ url_for('train') }}" class="btn-primary">Train Models</a>
+    </div>
+
+    <div class="step-card">
+        <h3>Step 3: Predictive Analytics</h3>
+        <p>Input real-time sensory data arrays to compute regional flood probability indices.</p>
+        <a href="{{ url_for('prediction') }}" class="btn-primary">Run Analytics</a>
+    </div>
+</div>
+{% endblock %}

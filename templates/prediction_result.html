@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="dashboard-card" style="text-align: center; padding: 50px 30px;">
+    <h2 style="color: var(--text-muted); font-size: 16px; text-transform: uppercase; letter-spacing: 1px;">Analysis Complete</h2>
+    
+    <h1 style="font-size: 48px; margin: 15px 0; color: var(--primary);">
+        {{ (prediction * 100) | round(2) }}%
+    </h1>
+    <p>Computed Flood Probability</p>
+
+    <div style="max-width: 500px; margin: 30px auto;">
+        {% if prediction > 0.7 %}
+            <div class="alert-box danger">
+                ⚠️ CRITICAL SYSTEM ALERT: High Flood Risk Detected. Immediate mitigation measures recommended.
+            </div>
+        {% elif prediction > 0.4 %}
+            <div class="alert-box warning">
+                ⚠️ ELEVATED MONITORING NOTICE: Moderate flood risk area. Increase surveillance frequency.
+            </div>
+        {% else %}
+            <div class="alert-box success">
+                ✅ STABLE MONITORING STATUS: Low environmental risk levels observed.
+            </div>
+        {% endif %}
+    </div>
+
+    <div style="margin-top: 40px;">
+        <a href="{{ url_for('prediction') }}" class="btn btn-primary">Run New Analysis</a>
+        <a href="{{ url_for('home') }}" class="btn btn-secondary" style="margin-left: 10px;">Return to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="dashboard-card">
+    <h2>Real-Time Risk Analytics Form</h2>
+    <p>Input the environmental and infrastructure metrics to calculate vulnerability.</p>
+
+    <button type="button" class="btn-secondary" id="random-btn" style="margin-bottom: 20px; padding: 10px 20px; cursor: pointer;">
+        Fill with Random Dataset Sample
+    </button>
+
+    <form action="{{ url_for('predict') }}" method="POST" id="pred-form">
+        <div class="grid-form">
+            {% for feature in ['MonsoonIntensity', 'TopographyDrainage', 'RiverManagement', 'Deforestation', 'Urbanization', 'ClimateChange', 'DamsQuality', 'Siltation', 'AgriculturalPractices', 'Encroachments', 'IneffectiveDisasterPreparedness', 'DrainageSystems', 'CoastalVulnerability', 'Landslides', 'Watersheds', 'DeterioratingInfrastructure', 'PopulationScore', 'WetlandLoss', 'InadequatePlanning', 'PoliticalFactors'] %}
+            <div class="form-group">
+                <label for="{{ feature }}">{{ feature }}</label>
+                <input type="number" step="0.1" id="{{ feature }}" name="{{ feature }}" required placeholder="0.0" min="0" max="10">
+            </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn-primary" style="margin-top: 25px; width: 100%;">Compute Dynamic Prediction</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('random-btn').onclick = function() {
+        fetch('/get_random_data')
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert("Error fetching data: " + data.error);
+                    return;
+                }
+                // Automatically populate each field by ID
+                for (const [key, value] of Object.entries(data)) {
+                    const input = document.getElementById(key);
+                    if (input) {
+                        input.value = value;
+                    }
+                }
+            })
+            .catch(error => console.error('Error fetching random data:', error));
+    };
+</script>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="dashboard-card">
+    <h2>Algorithm Calibration Diagnostics</h2>
+    
+    {% if results and results is mapping %}
+        <p>The system has processed training routines successfully.</p>
+
+        <div class="results-table-container" style="margin: 30px 0;">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Algorithm</th>
+                        <th style="text-align: center;">Prediction Score</th>
+                        <th style="text-align: center;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for model_name, score in results.items() %}
+                    <tr class="{% if score | float == best_score | float %}table-success-row{% endif %}">
+                        <td><strong>{{ model_name }}</strong></td>
+                        {# Centered Prediction Score #}
+                        <td style="text-align: center;">{{ score }}%</td>
+                        
+                        {# Centered Status Badge #}
+                        <td style="text-align: center;">
+                            {% if score | float == best_score | float %}
+                                <span class="badge-success">PROMOTED</span>
+                            {% else %}
+                                <span class="text-muted">Stored</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p style="color: red;"><strong>Data Error:</strong> Results could not be loaded.</p>
+    {% endif %}
+
+    <a href="{{ url_for('prediction') }}" class="btn btn-primary">Test Live Prediction Panel</a>
+</div>
+{% endblock %}

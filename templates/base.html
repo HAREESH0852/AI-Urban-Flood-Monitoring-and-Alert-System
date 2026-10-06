@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI Flood Monitoring Ecosystem{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="sidebar">
+    <h2>🌊 Urban Flood AI</h2>
+    
+    <div class="nav-links">
+        <a href="{{ url_for('home') }}">Dashboard Home</a>
+        <a href="{{ url_for('dataset') }}">View Dataset</a>
+        <a href="{{ url_for('prediction') }}">Risk Prediction</a>
+        <a href="{{ url_for('train') }}">Model Training</a>
+    </div>
+
+    <a href="{{ url_for('login') }}" style="margin-left: auto; color: #ef4444;">Sign Out</a>
+</nav>
+
+    <div class="main-workspace">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

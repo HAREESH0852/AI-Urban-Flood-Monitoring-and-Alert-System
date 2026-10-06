@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Dataset Explorer - Urban Flood AI{% endblock %}
+
+{% block content %}
+<div class="dashboard-card">
+    <h2>Hydrological Historical Records Explorer</h2>
+    <p>Displaying the top 100 real-time tracking points loaded natively from <code>data_set/flood.csv</code>.</p>
+    
+    <div class="table-container" style="overflow-x: auto; margin-top: 20px; border-radius: 8px; border: 1px solid #e2e8f0;">
+        {{ data_table | safe }}
+    </div>
+</div>
+{% endblock %}

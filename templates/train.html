@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="dashboard-card">
+    <h2>Multi-Algorithm AI Orchestrator Console</h2>
+    <p>Triggering this process fits <strong>Random Forest</strong>, <strong>Gradient Boosting</strong>, and <strong>Artificial Neural Network (ANN)</strong> variants concurrently over the dataset.</p>
+    
+    <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #e2e8f0;">
+        <p style="margin: 0; font-size: 14px; color: #334155;">
+            <strong>Optimization note:</strong> The system evaluates performance based on prediction scores, 
+            automatically promoting the highest scoring model. <em>Note: Training may take a moment.</em>
+        </p>
+    </div>
+
+    <form action="{{ url_for('train_model') }}" method="post" id="train-form">
+        <button type="submit" class="btn-primary" id="train-btn" style="padding: 12px 24px; font-size: 16px; transition: all 0.3s ease;">
+            Initialize Model Training Sequences
+        </button>
+    </form>
+
+    <div id="training-status" style="margin-top: 20px; display: none;">
+        <div style="background: #eff6ff; padding: 15px; border-radius: 8px; border-left: 4px solid #3b82f6; animation: pulse 2s infinite;">
+            <p style="margin: 0; color: #1e40af; font-weight: 600;">
+                <em>Processing algorithmic optimization... please do not navigate away.</em>
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.6; }
+        100% { opacity: 1; }
+    }
+</style>
+
+<script>
+    document.getElementById('train-form').onsubmit = function() {
+        const btn = document.getElementById('train-btn');
+        btn.disabled = true;
+        btn.innerText = "Training Models (Please wait)...";
+        btn.style.opacity = "0.7";
+        btn.style.cursor = "not-allowed";
+        
+        document.getElementById('training-status').style.display = 'block';
+    };
+</script>
+{% endblock %}
